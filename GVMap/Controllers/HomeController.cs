@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GVMap.Models;
+using MongoDB.Bson;
+using GVMap.Core.Repository.Markers;
 
 namespace GVMap.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MapRepository repository;
+        private readonly IMarkerRepository repository;
 
-        public HomeController(MapRepository repository)
+        public HomeController(IMarkerRepository repository)
         {
             this.repository = repository;
         }
@@ -21,11 +23,11 @@ namespace GVMap.Controllers
             return View();
         }
 
-        public ActionResult PutMarker(long? id)
+        public ActionResult PutMarker(ObjectId? id)
         {
             if (id.HasValue)
             {
-                MarkerModel result = repository.getMarkerInfo(id);
+                MarkerModel result = repository.GetMarker(id.Value);
                 return View("_PopupMarker", result);
             }
 

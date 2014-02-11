@@ -1,0 +1,19 @@
+img {
+	height: 100px;
+	width: 140px;
+}
+
+textarea {
+	margin: 0px;
+	height: 101px;
+	width: 201px;
+	resize: none;
+}
+
+.popupInfo {
+	width: 345px;
+}
+
+div.gm-style-iw {
+	width: 345px;
+}

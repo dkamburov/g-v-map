@@ -33,7 +33,14 @@ MapHolder = {
 			});
 
 			marker.setMap(map);
-			
+
+            var emptyContent = new Object();
+			$.ajax({
+                url: '/Home/PutMarker',
+                success : function (data) {
+                    emptyContent = data;
+                },
+            });
 			
 			
 			var infowindow = new google.maps.InfoWindow({

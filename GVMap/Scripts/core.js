@@ -3,6 +3,10 @@ $(document).ready(function () {
 	MapHolder.Initialize();
 	MapHolder.BindDBClick();
 	Buttons.BindEvents();
+
+    $(window).resize(function() {
+        $('#googleMap').css({height:parseInt($(this).height() - 30), width: parseInt($(this).width() - 30)});
+    });
 });
 
 

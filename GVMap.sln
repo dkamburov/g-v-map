@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVMap", "GVMap\GVMap.csproj", "{7F00ACD2-9EED-4185-A064-4F9CC1CC2F24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVMap.MVC", "GVMap\GVMap.MVC.csproj", "{7F00ACD2-9EED-4185-A064-4F9CC1CC2F24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVMap.Core", "GVMap.Core\GVMap.Core.csproj", "{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVMap.Repository", "GVMap.Repository\GVMap.Repository.csproj", "{5900DE30-4601-43C8-AC74-44035A8895A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,14 @@ Global
 		{7F00ACD2-9EED-4185-A064-4F9CC1CC2F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F00ACD2-9EED-4185-A064-4F9CC1CC2F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F00ACD2-9EED-4185-A064-4F9CC1CC2F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5900DE30-4601-43C8-AC74-44035A8895A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5900DE30-4601-43C8-AC74-44035A8895A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5900DE30-4601-43C8-AC74-44035A8895A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5900DE30-4601-43C8-AC74-44035A8895A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,3 +17,9 @@ textarea {
 div.gm-style-iw {
 	width: 345px;
 }
+
+#googleMap {
+    margin: 15px 0px 0px 15px;
+    max-height: 620px;
+    max-width: 1320px;
+}

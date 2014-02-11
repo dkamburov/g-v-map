@@ -33,5 +33,17 @@ namespace GVMap.Controllers
 
             return View("_PopupMarker");
         }
+
+        public void UpsertMarker(ObjectId? id, string text, string imageUrl)
+        {
+            if (id.HasValue)
+            {
+                repository.UpdateMarker(id.Value, text, imageUrl);
+            }
+            else
+            {
+                repository.InsertMarker(text, imageUrl);
+            }
+        }
     }
 }

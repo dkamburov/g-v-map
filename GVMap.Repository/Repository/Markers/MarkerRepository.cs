@@ -28,5 +28,28 @@
         {
             return markerCollection.FindAll().ToList();
         }
+
+        public void InsertMarker(string text, string imageUrl)
+        {
+            MarkerModel model = new MarkerModel
+                                        {
+                                            //Id = new ObjectId(),
+                                            Text = text,
+                                            ImageUrl = imageUrl
+                                        };
+            markerCollection.Insert(model);
+        }
+
+        public void UpdateMarker(ObjectId id, string text, string imageUrl)
+        {
+            var query = Query<MarkerModel>.EQ(u => u.Id, id);
+
+            //var update = new UpdateDocument {
+            //            { "$set", "Text" = text, "ImageUrl" = imageUrl }
+            //                            };
+            var update = Update.Set("Text", text).Set("ImageUrl", imageUrl);
+
+            markerCollection.Update(query, update);
+        }
     }
 }

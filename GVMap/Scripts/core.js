@@ -34,24 +34,29 @@ MapHolder = {
 
 			marker.setMap(map);
 
-            var emptyContent = new Object();
+            //var emptyContent = new Object();
 			$.ajax({
                 url: '/Home/PutMarker',
+                data: {id : null},
                 success : function (data) {
-                    emptyContent = data;
+                    //emptyContent = data;
+
+                    var infowindow = new google.maps.InfoWindow({
+		  		        content: data//$('.popupInfo').html()//"Hello World!"
+		  	        });
+
+                    infowindow.open(map,marker);
+
+//			        google.maps.event.addListener(marker, 'click', function() {
+//	  			        infowindow.open(map,marker);
+//				        $('div.gm-style-iw textarea').prop("disabled", true)
+//				        $('div.gm-style-iw textarea').css({background: "white", border: "none"});
+//	  		        });
                 },
             });
 			
 			
-			var infowindow = new google.maps.InfoWindow({
-		  		content:$('.popupInfo').html()//"Hello World!"
-		  	});
-
-			google.maps.event.addListener(marker, 'click', function() {
-	  			infowindow.open(map,marker);
-				$('div.gm-style-iw textarea').prop("disabled", true)
-				$('div.gm-style-iw textarea').css({background: "white", border: "none"});
-	  		});
+			
 		});	
 		
 		
@@ -69,12 +74,36 @@ Buttons = {
 			$(this).closest('div.innerPopup').find('textarea').css('border',"1px solid #36E6F5");
 		});
 		
-		$(document).on('click', '.btn-info.save', function () {
+		$(document).on('click', '.btn-info.save', function (e, t ,q) {
 			$(this).toggleClass("edit").toggleClass("save").toggleClass("btn-primary").toggleClass("btn-info");
 			$(this).text("edit")
 			$(this).closest('div.innerPopup').find('textarea').prop("disabled", true);
 			$('div.gm-style-iw textarea').prop("disabled", true)
 			$('div.gm-style-iw textarea').css({background: "white", border: "none"});
+
+            var tmp = $(this).closest('div.innerPopup').find('input[type=hidden]').val();
+            var dataPassed = new Object();
+            if(tmp){
+                dataPassed = parseInt(tmp);
+            }
+            else dataPassed = null;
+
+            $.ajax({
+                url: '/Home/UpsertMarker',
+                data: {id : dataPassed, 
+                                        text: $(this).closest('div.innerPopup').find('textarea').val(), 
+                                        //imageUrl:$(this).closest('div.innerPopup').find('napravi da se dobavq snimka :D')
+                                      },
+                success : function (data) {
+                    console.log("success on upsert");        
+                    //return id na marker i go slojiv i hidden poleto     
+                     google.maps.event.addListener(marker, 'click', function() {
+	  			        infowindow.open(map,marker);
+				        $('div.gm-style-iw textarea').prop("disabled", true)
+				        $('div.gm-style-iw textarea').css({background: "white", border: "none"});
+	  		        });
+                }
+            });
 		});
 	}
 }

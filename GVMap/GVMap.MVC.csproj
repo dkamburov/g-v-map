@@ -307,9 +307,10 @@
       <Project>{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}</Project>
       <Name>GVMap.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\GVMap.Repository\GVMap.Repository.csproj">
+      <Project>{5900DE30-4601-43C8-AC74-44035A8895A9}</Project>
+      <Name>GVMap.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

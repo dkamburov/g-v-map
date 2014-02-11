@@ -1,3 +1,5 @@
+using GVMap.Infrastructure.Ninject;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(GVMap.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(GVMap.App_Start.NinjectWebCommon), "Stop")]
 
@@ -53,6 +55,7 @@ namespace GVMap.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Load(new AppModule());
         }        
     }
 }

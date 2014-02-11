@@ -47,11 +47,11 @@ MapHolder = {
 
                     infowindow.open(map,marker);
 
-//			        google.maps.event.addListener(marker, 'click', function() {
-//	  			        infowindow.open(map,marker);
-//				        $('div.gm-style-iw textarea').prop("disabled", true)
-//				        $('div.gm-style-iw textarea').css({background: "white", border: "none"});
-//	  		        });
+			        google.maps.event.addListener(marker, 'click', function() {
+	  			        infowindow.open(map,marker);
+				        $('div.gm-style-iw textarea').prop("disabled", true)
+				        $('div.gm-style-iw textarea').css({background: "white", border: "none"});
+	  		        });
                 },
             });
 			
@@ -97,11 +97,7 @@ Buttons = {
                 success : function (data) {
                     console.log("success on upsert");        
                     //return id na marker i go slojiv i hidden poleto     
-                     google.maps.event.addListener(marker, 'click', function() {
-	  			        infowindow.open(map,marker);
-				        $('div.gm-style-iw textarea').prop("disabled", true)
-				        $('div.gm-style-iw textarea').css({background: "white", border: "none"});
-	  		        });
+                    
                 }
             });
 		});

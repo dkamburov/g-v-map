@@ -4,6 +4,7 @@
 }
 <div class="popupInfo @(Model == null ? "empty")">
     <div class="innerPopup">
+        <input type=hidden value=@(Model != null ? Model.Id) />
         <img src="@(Model != null ? Model.ImageUrl : string.Empty)" alt="no image" />
         <textarea rows="4" cols="30" placeholder="Write some text...">@(Model != null ? Model.Text : string.Empty)</textarea>
         <div class="btn-group btn-group-xs pull-right">

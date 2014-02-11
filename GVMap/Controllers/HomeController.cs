@@ -12,5 +12,14 @@ namespace GVMap.Controllers
         {
             return View();
         }
+
+        public ActionResult PutMarker(long? id)
+        {
+            if (id.HasValue)
+            {
+
+            }
+            
+        }
     }
 }

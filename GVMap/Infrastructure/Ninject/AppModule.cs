@@ -4,6 +4,7 @@
     using global::Ninject.Activation;
     using global::Ninject.Modules;
     using MongoDB.Driver;
+    using GVMap.Infrastructure.Ninject.Providers;
 
     public class AppModule : NinjectModule
     {

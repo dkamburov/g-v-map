@@ -1,6 +1,5 @@
 img {
-	height: 100px;
-	width: 140px;
+	max-width: 200px;
 }
 
 textarea {

@@ -1,8 +1,7 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
     console.log('Welcome');
     MapHolder.Initialize();
     MapHolder.BindDBClick();
-    Buttons.BindEvents();
     MapHolder.BindExitClicksOnInitialization();
 
     $('#googleMap').css({ height: parseInt($(window).height() - 30), width: parseInt($(window).width() - 30) });
@@ -15,6 +14,7 @@ $(document).ready(function () {
         url: '/Home/GetMarkers',
         success: function (markers) {
             $.each(markers, function (index, value) {
+                var coords = value.Coordinates;
                 value.Coordinates = value.Coordinates.replace("(", "");
                 value.Coordinates = value.Coordinates.replace(")", "");
                 
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 var point = new google.maps.LatLng(parseFloat(bits[0]),parseFloat(bits[1]));
 
                 var infowindow = new google.maps.InfoWindow({
-                    content: "<div><img src=/Home/GetImage/"+ value.Id +"><p>" + value.Description + "</p></div>"
+                    content: "<div class='markerContent'><input class='markerId' type='hidden' value='"+ value.Id +"'><input class='markerCoords' type='hidden' value='"+ coords +"'><img src=/Home/GetImage/"+ value.Id +"><p>" + value.Description + "</p><button class='editMarker btn btn-default'>Редакция</button></div>"
                 });
 
                 var marker = new google.maps.Marker({
@@ -38,6 +38,14 @@ $(document).ready(function () {
         error: function () {
             alert("Error getting the markers!");
         }
+    });
+
+    $(document).on("click", ".editMarker", function() {
+        var markerContent = $(this).closest(".markerContent");
+        
+        $("#coordinates").val(markerContent.find(".markerCoords").val());
+        $("#id").val(markerContent.find(".markerId").val());
+        $("#description").val(markerContent.find("p").html());
     });
 
 });
@@ -77,46 +85,3 @@ MapHolder = {
         });
     }
 };
-
-
-Buttons = {
-    BindEvents: function() {
-        $(document).on('click', '.btn-primary.edit', function() {
-            $(this).toggleClass("edit").toggleClass("save").toggleClass("btn-primary").toggleClass("btn-info");
-            $(this).text("save");
-            $(this).closest('div.innerPopup').find('textarea').prop("disabled", false);
-            $(this).closest('div.innerPopup').find('textarea').css('border', "1px solid #36E6F5");
-        });
-
-        $(document).on('click', '.btn-info.save', function(e, t, q) {
-            $(this).toggleClass("edit").toggleClass("save").toggleClass("btn-primary").toggleClass("btn-info");
-            $(this).text("edit")
-            $(this).closest('div.innerPopup').find('textarea').prop("disabled", true);
-            $('div.gm-style-iw textarea').prop("disabled", true)
-            $('div.gm-style-iw textarea').css({ background: "white", border: "none" });
-
-            var tmp = $(this).closest('div.innerPopup').find('input[type=hidden]').val();
-            var dataPassed = new Object();
-            if (tmp) {
-                dataPassed = parseInt(tmp);
-            } else dataPassed = null;
-
-            $.ajax({
-                url: '/Home/UpsertMarker',
-                data: {
-                    id: dataPassed,
-                    text: $(this).closest('div.innerPopup').find('textarea').val()
-                    //imageUrl:$(this).closest('div.innerPopup').find('napravi da se dobavq snimka :D')
-                },
-                success: function(data) {
-                    console.log("success on upsert");
-                    //return id na marker i go slojiv i hidden poleto                         
-                }
-            });
-        });
-    }
-};
-
-
-
-

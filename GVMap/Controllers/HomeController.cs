@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -37,17 +35,20 @@ namespace GVMap.Controllers
         }
 
 
-        public ActionResult UpsertMarker(ObjectId? id, string coordinates, string description, HttpPostedFileBase file)
+        public ActionResult UpsertMarker(string id, string coordinates, string description, HttpPostedFileBase file)
         {
             using (var ms = new MemoryStream())
             {
-                file.InputStream.CopyTo(ms);
+                if (file != null)
+                {
+                    file.InputStream.CopyTo(ms);
+                }
 
-                if (id.HasValue)
+                if (!string.IsNullOrEmpty(id))
                 {
                     var model = new MarkerModel
                     {
-                        Id = id.Value,
+                        Id = new ObjectId(id),
                         Coordinates = coordinates,
                         Description = description,
                         Image = ms.ToArray()

@@ -11,8 +11,8 @@
 
         List<MarkerModel> GetAllMarkers();
 
-        void InsertMarker(string text, string imageUrl);
+        void InsertMarker(MarkerModel model);
 
-        void UpdateMarker(ObjectId id, string text, string imageUrl);
+        void UpdateMarker(MarkerModel model);
     }
 }

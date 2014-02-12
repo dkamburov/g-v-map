@@ -29,25 +29,16 @@
             return markerCollection.FindAll().ToList();
         }
 
-        public void InsertMarker(string text, string imageUrl)
-        {
-            MarkerModel model = new MarkerModel
-                                        {
-                                            //Id = new ObjectId(),
-                                            Text = text,
-                                            ImageUrl = imageUrl
-                                        };
+        public void InsertMarker(MarkerModel model)
+        {            
             markerCollection.Insert(model);
         }
 
-        public void UpdateMarker(ObjectId id, string text, string imageUrl)
+        public void UpdateMarker(MarkerModel model)
         {
-            var query = Query<MarkerModel>.EQ(u => u.Id, id);
+            var query = Query<MarkerModel>.EQ(u => u.Id, model.Id);
 
-            //var update = new UpdateDocument {
-            //            { "$set", "Text" = text, "ImageUrl" = imageUrl }
-            //                            };
-            var update = Update.Set("Text", text).Set("ImageUrl", imageUrl);
+            var update = Update.Set("Description", model.Description).Set("Image", model.Image).Set("Coordinates", model.Coordinates);
 
             markerCollection.Update(query, update);
         }

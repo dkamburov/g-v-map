@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,27 +24,51 @@ namespace GVMap.Controllers
             return View();
         }
 
-        public ActionResult PutMarker(ObjectId? id)
+        public ActionResult GetImage(string id)
         {
-            if (id.HasValue)
-            {
-                MarkerModel result = repository.GetMarker(id.Value);
-                return View("_PopupMarker", result);
-            }
-
-            return View("_PopupMarker");
+            return File(repository.GetMarker(new ObjectId(id)).Image, "image/*");
         }
 
-        public void UpsertMarker(ObjectId? id, string text, string imageUrl)
+        public JsonResult GetMarkers()
         {
-            if (id.HasValue)
+            var markers = repository.GetAllMarkers();
+
+            return Json(markers.Select(m => new { m.Description, m.Coordinates, Id = m.Id.ToString() }), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult UpsertMarker(ObjectId? id, string coordinates, string description, HttpPostedFileBase file)
+        {
+            using (var ms = new MemoryStream())
             {
-                repository.UpdateMarker(id.Value, text, imageUrl);
+                file.InputStream.CopyTo(ms);
+
+                if (id.HasValue)
+                {
+                    var model = new MarkerModel
+                    {
+                        Id = id.Value,
+                        Coordinates = coordinates,
+                        Description = description,
+                        Image = ms.ToArray()
+                    };
+
+                    repository.UpdateMarker(model);
+                }
+                else
+                {
+                    var model = new MarkerModel
+                    {
+                        Coordinates = coordinates,
+                        Description = description,
+                        Image = ms.ToArray()
+                    };
+
+                    repository.InsertMarker(model);
+                }
             }
-            else
-            {
-                repository.InsertMarker(text, imageUrl);
-            }
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -300,9 +300,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_PopupMarker.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GVMap.Core\GVMap.Core.csproj">
       <Project>{5124F9B9-5E48-4E05-AA1E-5D606FDF7F98}</Project>
       <Name>GVMap.Core</Name>

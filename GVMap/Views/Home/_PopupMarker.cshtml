@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<div class='"popupInfo @(Model == null ? "empty" : string.Empty)">
+<div class='popupInfo @(Model == null ? "empty" : string.Empty)'>
     <div class="innerPopup">
         <input type=hidden value='@(Model != null ? Model.Id : string.Empty)' />
         <img src="@(Model != null ? Model.ImageUrl : string.Empty)" alt="no image" />

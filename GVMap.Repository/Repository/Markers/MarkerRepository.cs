@@ -38,7 +38,7 @@
         {
             var query = Query<MarkerModel>.EQ(u => u.Id, model.Id);
 
-            var update = Update.Set("Description", model.Description).Set("Image", model.Image).Set("Coordinates", model.Coordinates);
+            var update = Update.Set("User", model.User).Set("Description", model.Description).Set("Image", model.Image).Set("Coordinates", model.Coordinates);
 
             markerCollection.Update(query, update);
         }

@@ -15,5 +15,7 @@ namespace GVMap.Models
         public string Description { get; set; }
 
         public byte[] Image { get; set; }
+
+        public string User { get; set; }
     }
 }

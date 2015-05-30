@@ -31,11 +31,11 @@ namespace GVMap.Controllers
         {
             var markers = repository.GetAllMarkers();
 
-            return Json(markers.Select(m => new { m.Description, m.Coordinates, Id = m.Id.ToString() }), JsonRequestBehavior.AllowGet);
+            return Json(markers.Select(m => new { m.Description, m.Coordinates, Id = m.Id.ToString(), User = m.User }), JsonRequestBehavior.AllowGet);
         }
 
 
-        public ActionResult UpsertMarker(string id, string coordinates, string description, HttpPostedFileBase file)
+        public ActionResult UpsertMarker(string id, string user, string coordinates, string description, HttpPostedFileBase file)
         {
             using (var ms = new MemoryStream())
             {
@@ -51,6 +51,7 @@ namespace GVMap.Controllers
                         Id = new ObjectId(id),
                         Coordinates = coordinates,
                         Description = description,
+                        User = user,
                         Image = ms.ToArray()
                     };
 
@@ -62,6 +63,7 @@ namespace GVMap.Controllers
                     {
                         Coordinates = coordinates,
                         Description = description,
+                        User = user,
                         Image = ms.ToArray()
                     };
 

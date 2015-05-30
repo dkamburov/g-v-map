@@ -22,7 +22,7 @@
                 var point = new google.maps.LatLng(parseFloat(bits[0]),parseFloat(bits[1]));
 
                 var infowindow = new google.maps.InfoWindow({
-                    content: "<div class='markerContent'><input class='markerId' type='hidden' value='"+ value.Id +"'><input class='markerCoords' type='hidden' value='"+ coords +"'><img src=/Home/GetImage/"+ value.Id +"><p>" + value.Description + "</p><button class='editMarker btn btn-default'>Редакция</button></div>"
+                    content: "<div class='markerContent'><input class='markerId' type='hidden' value='"+ value.Id +"'><input class='markerCoords' type='hidden' value='"+ coords +"'><img src=/Home/GetImage/"+ value.Id +"><br /><span>" + value.User + " : </span><p>" + value.Description + "</p><button class='editMarker btn btn-default'>Редакция</button></div>"
                 });
 
                 var marker = new google.maps.Marker({
@@ -47,7 +47,6 @@
         $("#id").val(markerContent.find(".markerId").val());
         $("#description").val(markerContent.find("p").html());
     });
-
 });
 
 
@@ -85,3 +84,21 @@ MapHolder = {
         });
     }
 };
+
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    $("#user-name").html(profile.getEmail());
+    $("#user").val(profile.getEmail());
+    $("#user-name").parent().append(
+        '<a href="#" onclick="signOut();" id="signOut">Sign out</a>');
+}
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        $("#user-name").html("Анонимен");
+        $("#user").val("Анонимен");
+        $("#signOut").remove();
+    });
+
+}
